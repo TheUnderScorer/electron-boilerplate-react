@@ -18,7 +18,7 @@ export const closeApp = () =>
     }
 };
 
-export const maximiseApp = () =>
+export const maximizeApp = () =>
 {
     const window = BrowserWindow.getFocusedWindow();
 

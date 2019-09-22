@@ -7,7 +7,7 @@ import {
     addEventListener,
     closeApp,
     isMaximized as windowIsMaximized,
-    maximiseApp,
+    maximizeApp,
     minimizeApp,
     removeEventListener
 } from '../../electron/windowHandlers';
@@ -56,9 +56,9 @@ const Header: FC = () =>
 
     const handleMaximize = useCallback( () =>
     {
-        maximiseApp();
+        maximizeApp();
         handleResize();
-    }, [ isMaximised ] );
+    }, [ isMaximised, handleResize ] );
 
     useEffect( () =>
     {
@@ -78,13 +78,13 @@ const Header: FC = () =>
                     <Button className="no-drag minimize" onClick={ minimizeApp }>
                         <Minimize/>
                     </Button>
-                    <Button className="no-drag" onClick={ handleMaximize }>
+                    <Button className="no-drag maximize" onClick={ handleMaximize }>
                         {
                             isMaximised ? <FilterNone/> : <CropSquare/>
                         }
                     </Button>
-                    <Button className="no-drag close">
-                        <Close onClick={ closeApp }/>
+                    <Button onClick={ closeApp } className="no-drag close">
+                        <Close/>
                     </Button>
                 </ButtonGroup>
             </DraggableToolBar>
