@@ -1,9 +1,16 @@
 import * as React from 'react';
-import { FC, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { AppBar, Button, ButtonGroup, Toolbar } from '@material-ui/core';
-import { Close, CropSquare, Minimize } from '@material-ui/icons'
+import { Close, CropSquare, FilterNone, Minimize } from '@material-ui/icons'
 import styled from 'styled-components';
-import { closeApp, isMaximized as windowIsMaximized, maximiseApp, minimizeApp } from '../../electron/windowHandlers';
+import {
+    addEventListener,
+    closeApp,
+    isMaximized as windowIsMaximized,
+    maximiseApp,
+    minimizeApp,
+    removeEventListener
+} from '../../electron/windowHandlers';
 
 const DraggableToolBar = styled( Toolbar )`
     -webkit-app-region: drag;
@@ -45,6 +52,23 @@ const DraggableToolBar = styled( Toolbar )`
 const Header: FC = () =>
 {
     const [ isMaximised, setIsMaximised ] = useState( windowIsMaximized() );
+    const handleResize = useCallback( () => setIsMaximised( windowIsMaximized ), [] );
+
+    const handleMaximize = useCallback( () =>
+    {
+        maximiseApp();
+        handleResize();
+    }, [ isMaximised ] );
+
+    useEffect( () =>
+    {
+        addEventListener( 'resize', handleResize );
+
+        return () =>
+        {
+            removeEventListener( 'resize', handleResize );
+        }
+    } );
 
     return (
         <AppBar position="static">
@@ -54,8 +78,10 @@ const Header: FC = () =>
                     <Button className="no-drag minimize" onClick={ minimizeApp }>
                         <Minimize/>
                     </Button>
-                    <Button className="no-drag" onClick={ maximiseApp }>
-                        <CropSquare/>
+                    <Button className="no-drag" onClick={ handleMaximize }>
+                        {
+                            isMaximised ? <FilterNone/> : <CropSquare/>
+                        }
                     </Button>
                     <Button className="no-drag close">
                         <Close onClick={ closeApp }/>
