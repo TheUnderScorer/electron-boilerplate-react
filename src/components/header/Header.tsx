@@ -14,7 +14,11 @@ import {
 
 const DraggableToolBar = styled( Toolbar )`
     -webkit-app-region: drag;
-    height: 70px;
+    height: 40px;
+    
+    &.MuiToolbar-root {
+        min-height: 0;
+    }
     
     .button-group {
         height: 100%;
