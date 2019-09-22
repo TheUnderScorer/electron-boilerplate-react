@@ -7,6 +7,7 @@ This project is an simple boilerplate that I use for my projects with electron. 
 - Redux
 - Material UI
 - Router
+- Storybook
 
 ### How to start
 
