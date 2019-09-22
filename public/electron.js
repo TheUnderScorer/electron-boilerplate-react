@@ -12,6 +12,7 @@ function createWindow() {
         width:          900,
         height:         680,
         frame:          false,
+        title:          'Electron app',
         webPreferences: {
             webSecurity:     false,
             nodeIntegration: true

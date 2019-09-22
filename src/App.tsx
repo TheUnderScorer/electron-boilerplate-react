@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import './App.css';
 import Providers from './components/providers/Providers';
 import Header from './components/header/Header';
-import { Container } from '@material-ui/core';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Root from './pages/Root';
+import MainContainer from './components/main-container/MainContainer';
 
 const App: FC = () =>
 {
@@ -13,9 +13,9 @@ const App: FC = () =>
             <Providers>
                 <div className="App">
                     <Header/>
-                    <Container fixed>
+                    <MainContainer>
                         <Route path="/" component={ Root }/>
-                    </Container>
+                    </MainContainer>
                 </div>
             </Providers>
         </Router>

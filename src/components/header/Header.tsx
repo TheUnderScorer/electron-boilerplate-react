@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC, useCallback, useEffect, useState } from 'react';
-import { AppBar, Button, ButtonGroup, Toolbar } from '@material-ui/core';
+import { AppBar, Button, ButtonGroup, Toolbar, Typography } from '@material-ui/core';
 import { Close, CropSquare, FilterNone, Minimize } from '@material-ui/icons'
 import styled from 'styled-components';
 import {
@@ -15,6 +15,7 @@ import {
 const DraggableToolBar = styled( Toolbar )`
     -webkit-app-region: drag;
     height: 40px;
+    padding-left: ${ props => props.theme.spacing( 1 ) }
     
     &.MuiToolbar-root {
         min-height: 0;
@@ -77,6 +78,9 @@ const Header: FC = () =>
     return (
         <AppBar position="static">
             <DraggableToolBar disableGutters>
+                <Typography variant="h6">
+                    Electron app
+                </Typography>
                 <div className="placeholder"/>
                 <ButtonGroup className="button-group">
                     <Button className="no-drag minimize" onClick={ minimizeApp }>

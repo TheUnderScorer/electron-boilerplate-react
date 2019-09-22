@@ -5,9 +5,7 @@ const Root: FC = () =>
 {
     return (
         <div>
-            <span>
-                Root
-            </span>
+            Root!
         </div>
     )
 };
